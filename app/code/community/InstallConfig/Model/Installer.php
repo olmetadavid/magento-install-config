@@ -23,8 +23,10 @@ class Clever_InstallConfig_Model_Installer extends Mage_Install_Model_Installer
         $console = Mage::getModel('install/installer_console');
 
         // Install each config.
-        foreach ($data[$console->getArgName()] as $config) {
-            $setupModel->setConfigData($config['path'], $config['value']);
+        if ($data) {
+            foreach ($data[$console->getArgName()] as $config) {
+                $setupModel->setConfigData($config['path'], $config['value']);
+            }
         }
 
         return $this;

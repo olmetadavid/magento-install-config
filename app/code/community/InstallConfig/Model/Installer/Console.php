@@ -26,7 +26,6 @@ class Clever_InstallConfig_Model_Installer_Console extends Mage_Install_Model_In
     {
         parent::setArgs($args);
 
-
         if (empty($args)) {
             // take server args
             $args = $_SERVER['argv'];
@@ -37,15 +36,16 @@ class Clever_InstallConfig_Model_Installer_Console extends Mage_Install_Model_In
         $match = false;
         $arguments = array();
         foreach ($args as $arg) {
-            if (preg_match('/^--config-(.*)$/', $arg, $match)) {
+            if (preg_match('/^--config(.*)$/', $arg, $match)) {
                 // argument name
-                $currentArg = $match[1];
-                // in case if argument doen't need a value
+                //$currentArg = $match[1];
+                $currentArg = count($arguments);
+                // in case if argument doesn't need a value
                 $arguments[$currentArg] = true;
             }
             else {
                 // argument value
-                if ($currentArg) {
+                if ($currentArg !== false) {
 
                     // Get the path and the value.
                     $parts = explode('::', $arg);
